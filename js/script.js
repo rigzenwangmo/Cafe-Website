@@ -1,0 +1,7 @@
+const links=document.querySelectorAll('.links a');
+links.forEach(a=>a.addEventListener('click',()=>document.querySelector('.links').classList.remove('open')));
+const sections=[...document.querySelectorAll('main section[id]')];
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{
+ if(e.isIntersecting){links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id))}
+}),{rootMargin:'-35% 0px -55% 0px'});
+sections.forEach(s=>observer.observe(s));
