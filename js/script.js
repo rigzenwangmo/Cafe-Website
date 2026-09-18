@@ -1,7 +1,13 @@
-const links=document.querySelectorAll('.links a');
-links.forEach(a=>a.addEventListener('click',()=>document.querySelector('.links').classList.remove('open')));
-const sections=[...document.querySelectorAll('main section[id]')];
-const observer=new IntersectionObserver(entries=>entries.forEach(e=>{
- if(e.isIntersecting){links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id))}
-}),{rootMargin:'-35% 0px -55% 0px'});
-sections.forEach(s=>observer.observe(s));
+const menuBtn=document.querySelector('.menu-btn');
+const links=document.querySelector('.links');
+if(menuBtn&&links) menuBtn.addEventListener('click',()=>links.classList.toggle('open'));
+
+document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>links&&links.classList.remove('open')));
+
+document.querySelectorAll('[data-year]').forEach(el=>el.textContent=new Date().getFullYear());
+
+const feedback=document.querySelector('#feedback-form');
+if(feedback){feedback.addEventListener('submit',e=>{e.preventDefault();document.querySelector('#success').style.display='block';feedback.reset();});}
+
+const contact=document.querySelector('#contact-form');
+if(contact){contact.addEventListener('submit',e=>{e.preventDefault();document.querySelector('#contact-success').style.display='block';contact.reset();});}
